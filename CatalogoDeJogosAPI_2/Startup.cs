@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CatalogoDeJogosAPI_2.Controllers.V1;
+using CatalogoDeJogosAPI_2.Middleware;
 using CatalogoDeJogosAPI_2.Repositories;
 using CatalogoDeJogosAPI_2.Services;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +33,14 @@ namespace CatalogoDeJogosAPI_2
 			services.AddScoped<IGameService, GameService>();
 			services.AddScoped<IGameRepository, GameRepository>();
 
+			#region CicloDeVida
+
+			services.AddSingleton<IExemploSingleton, ExemploCicloDeVida>();
+			services.AddScoped<IExemploScoped, ExemploCicloDeVida>();
+			services.AddTransient<IExemploTransient, ExemploCicloDeVida>();
+
+			#endregion
+
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
@@ -47,6 +57,8 @@ namespace CatalogoDeJogosAPI_2
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CatalogoDeJogosAPI_2 v1"));
 			}
+
+			app.UseMiddleware<ExceptionMiddleware>();
 
 			app.UseHttpsRedirection();
 
