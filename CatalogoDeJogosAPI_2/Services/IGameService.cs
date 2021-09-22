@@ -7,14 +7,14 @@ using CatalogoDeJogosAPI_2.ViewModel;
 
 namespace CatalogoDeJogosAPI_2.Services
 {
-    public interface IGameService
+    public interface IGameService : IDisposable
     {
-        Task<List<GameViewModel>> Get(int pagina, int quantidade);
-        Task<GameViewModel> Get(Guid id);
-        Task<GameViewModel> Post(GameInputModel jogo);
-        Task<GameViewModel> Update(Guid id, GameInputModel jogo);
-        Task<GameViewModel> Update(Guid id, double preco);
-        Task<GameViewModel> Delete(Guid id);
+        Task<List<GameViewModel>> Obter(int pagina, int quantidade);
+        Task<GameViewModel> Obter(Guid id);
+        Task<GameViewModel> Inserir(GameInputModel game);
+        Task Atualizar(Guid id, GameInputModel game);
+        Task Atualizar(Guid id, double preco);
+        Task Remover(Guid id);
 
     }
 }

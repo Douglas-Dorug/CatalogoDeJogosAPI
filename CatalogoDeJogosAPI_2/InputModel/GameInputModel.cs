@@ -10,7 +10,7 @@ namespace CatalogoDeJogosAPI_2.InputModel
     {
         [Required]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "O nome do Jogo deve conter entre 3 e 100 caracteres")]
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "O nome da produtora deve conter entre 3 e 100 caracteres")]
